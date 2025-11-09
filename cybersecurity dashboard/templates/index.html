@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="scan-section">
+    <h2>Website Security Scanner</h2>
+    <div class="scan-form">
+        <input type="url" id="url-input" placeholder="Enter website URL (e.g., https://example.com)" required>
+        <button id="scan-btn" onclick="performScan()">Scan Now</button>
+    </div>
+    <div id="loading" class="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Scanning... Please wait.</p>
+    </div>
+</div>
+
+<div id="results" class="results" style="display: none;">
+    <h3>Scan Results</h3>
+    <div class="risk-score">
+        <h4>Risk Score: <span id="risk-score">0</span>/100</h4>
+        <div class="progress-bar">
+            <div id="risk-bar" class="progress-fill"></div>
+        </div>
+    </div>
+
+    <div class="results-grid">
+        <div class="result-card">
+            <h4>Security Headers</h4>
+            <div id="headers-result"></div>
+        </div>
+        <div class="result-card">
+            <h4>SSL/TLS Configuration</h4>
+            <div id="ssl-result"></div>
+        </div>
+        <div class="result-card">
+            <h4>Open Ports</h4>
+            <div id="ports-result"></div>
+        </div>
+        <div class="result-card">
+            <h4>Cookies & Server Info</h4>
+            <div id="cookies-result"></div>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="vulnerabilityChart"></canvas>
+    </div>
+
+    <button id="export-btn" onclick="exportReport()">Export PDF</button>
+</div>
+
+<div id="history-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" onclick="closeHistory()">&times;</span>
+        <h3>Scan History</h3>
+        <div id="history-list"></div>
+    </div>
+</div>
+{% endblock %}
